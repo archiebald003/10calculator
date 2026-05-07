@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 10-10-10 Growth Formula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0c0c0c;
+    --ink: #1a1a1a;
+    --white: #faf9f7;
+    --off: #f2f1ef;
+    --stone: #e8e6e1;
+    --muted: #9a9690;
+    --mid: #6b6762;
+    --border: rgba(0,0,0,0.1);
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: rgba(250,249,247,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--mid);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    background: var(--ink) !important;
+    color: var(--white) !important;
+    padding: 10px 24px;
+    font-size: 12px !important;
+    letter-spacing: 0.1em !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: #333 !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 60px 80px;
+    gap: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '10·10·10';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 140px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.04);
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-left { position: relative; z-index: 1; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 32px;
+  }
+
+  .tag::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 5.5vw, 80px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .hero h1 strong { font-weight: 700; font-style: italic; }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--mid);
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+
+  .btn-group { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 15px 36px;
+    background: var(--ink);
+    color: var(--white);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1.5px solid var(--ink);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary:hover { background: transparent; color: var(--ink); }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 15px 36px;
+    background: transparent;
+    color: var(--mid);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1.5px solid var(--stone);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+  .hero-right { display: flex; flex-direction: column; gap: 2px; }
+
+  .hero-stat {
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    background: var(--off);
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.7s ease both;
+  }
+
+  .hero-stat:nth-child(1) { animation-delay: 0.1s; }
+  .hero-stat:nth-child(2) { animation-delay: 0.2s; background: var(--ink); }
+  .hero-stat:nth-child(3) { animation-delay: 0.3s; }
+  .hero-stat:nth-child(2) .stat-label  { color: rgba(255,255,255,0.5); }
+  .hero-stat:nth-child(2) .stat-number { color: var(--white); }
+  .hero-stat:nth-child(2) .stat-desc   { color: rgba(255,255,255,0.6); }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .stat-desc { font-size: 13px; color: var(--mid); line-height: 1.5; }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: var(--muted);
+    position: relative; overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    left: -100%; top: 0;
+    width: 100%; height: 100%;
+    background: var(--ink);
+    animation: scrollLine 2s ease infinite;
+  }
+
+  @keyframes scrollLine {
+    0%   { left: -100%; }
+    50%  { left: 0%; }
+    100% { left: 100%; }
+  }
+
+  /* ── SECTION COMMONS ── */
+  .section { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--muted);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  h2 em { font-style: italic; font-weight: 600; }
+
+  .lead {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--mid);
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+
+  /* ── PROBLEM SECTION ── */
+  .problem-section {
+    background: var(--ink);
+    color: var(--white);
+    padding: 100px 60px;
+  }
+
+  .problem-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .problem-section .section-tag { color: rgba(255,255,255,0.4); }
+  .problem-section .section-tag::before { background: rgba(255,255,255,0.3); }
+  .problem-section h2 { color: var(--white); }
+  .problem-section .lead { color: rgba(255,255,255,0.6); }
+
+  .problem-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .problem-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+
+  .problem-list li::before {
+    content: '—';
+    color: rgba(255,255,255,0.25);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── THREE LEVERS ── */
+  .levers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 56px 0;
+    background: var(--stone);
+    border: 1px solid var(--stone);
+  }
+
+  .lever-card {
+    background: var(--white);
+    padding: 44px 36px;
+    position: relative;
+    transition: background 0.3s, transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+
+  .lever-card:hover {
+    background: var(--off);
+    transform: translateY(-7px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.09);
+  }
+
+  .lever-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 100px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.05);
+    line-height: 1;
+    position: absolute;
+    top: 16px; right: 20px;
+    user-select: none;
+  }
+
+  .lever-icon {
+    width: 40px; height: 40px;
+    border: 1px solid var(--stone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+
+  .lever-card:hover .lever-icon {
+    border-color: var(--ink);
+    background: var(--ink);
+  }
+
+  .lever-icon svg {
+    width: 18px; height: 18px;
+    stroke: var(--ink);
+    fill: none;
+    stroke-width: 1.5;
+    transition: stroke 0.25s;
+  }
+
+  .lever-card:hover .lever-icon svg { stroke: var(--white); }
+
+  .lever-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .lever-body { font-size: 14px; line-height: 1.8; color: var(--mid); }
+
+  /* ── MATH SECTION ── */
+  .math-band {
+    background: var(--off);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 60px;
+    text-align: center;
+  }
+
+  .math-label {
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+
+  .math-equation {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 54px);
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .math-equation strong { font-weight: 700; font-style: italic; }
+
+  .math-note {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .math-chips {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .chip {
+    padding: 10px 20px;
+    border: 1px solid var(--stone);
+    background: var(--white);
+    font-size: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--mid);
+  }
+
+  .chip strong { font-style: normal; font-weight: 700; color: var(--ink); margin-right: 4px; }
+
+  /* ── CALCULATOR ── */
+  .calc-section {
+    padding: 100px 60px;
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .calc-inner { max-width: 900px; margin: 0 auto; }
+
+  .calc-section .section-tag { color: rgba(255,255,255,0.35); }
+  .calc-section .section-tag::before { background: rgba(255,255,255,0.25); }
+  .calc-section h2 { color: var(--white); margin-bottom: 12px; }
+  .calc-section .lead { color: rgba(255,255,255,0.55); margin-bottom: 48px; }
+
+  .calc-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 48px;
+  }
+
+  .calc-group-label {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .calc-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin: 32px 0;
+  }
+
+  .ctrl-row { margin-bottom: 24px; }
+
+  .ctrl-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+
+  .ctrl-label { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.7); letter-spacing: 0.02em; }
+  .ctrl-val { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--white); }
+
+  /* ── SLIDER TRACK FILL ── */
+  .range-wrap {
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin: 4px 0 10px;
+  }
+
+  .range-track {
+    position: absolute;
+    top: 50%; left: 0;
+    transform: translateY(-50%);
+    height: 1px;
+    width: 100%;
+    background: rgba(255,255,255,0.12);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .range-fill {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    background: rgba(255,255,255,0.6);
+    pointer-events: none;
+    transition: width 0.04s linear;
+  }
+
+  .range-wrap input[type=range] {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+    background: transparent;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    outline: none;
+    cursor: pointer;
+    margin: 4px 0 10px;
+    border-radius: 0;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--white);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: transform 0.15s;
+  }
+
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.25); }
+
+  .ctrl-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  .sbtn {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: var(--white);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Instrument Sans', sans-serif;
+    transition: border-color 0.2s, background 0.2s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .sbtn:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
+
+  .or-label { font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
+
+  .ni-wrap { display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.15); }
+
+  .ni-prefix {
+    padding: 0 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.04);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .ni {
+    width: 88px; height: 32px;
+    font-size: 13px;
+    font-family: 'Instrument Sans', sans-serif;
+    padding: 0 10px;
+    border: none;
+    background: transparent;
+    color: var(--white);
+    text-align: right;
+  }
+
+  .ni:focus { outline: none; }
+
+  .ni-bare {
+    width: 88px; height: 32px;
+    font-size: 13px;
+    font-family: 'Instrument Sans', sans-serif;
+    padding: 0 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: var(--white);
+    text-align: right;
+  }
+
+  .ni-bare:focus { outline: none; border-color: rgba(255,255,255,0.5); }
+
+  /* ── RESULTS ── */
+  .results-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-top: 36px;
+  }
+
+  .res-cell { background: var(--ink); padding: 24px 20px; }
+
+  .res-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .res-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    transition: opacity 0.12s ease;
+  }
+
+  .res-val.accent { color: #c8d8c0; }
+  .res-val.dim { opacity: 0.3; }
+
+  .eq-display {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-top: 16px;
+    font-family: 'Instrument Sans', sans-serif;
+    letter-spacing: 0.04em;
+    transition: opacity 0.12s ease;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-left h2 { margin-bottom: 20px; }
+  .contact-urgency { font-size: 15px; line-height: 1.85; color: var(--mid); margin-bottom: 32px; }
+  .contact-detail { margin-bottom: 28px; }
+
+  .contact-detail-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .contact-detail-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .contact-right { padding-top: 8px; }
+
+  .testimonial-block {
+    border: 1px solid var(--border);
+    padding: 40px;
+    background: var(--off);
+    margin-bottom: 32px;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .testimonial-name {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .urgency-box { border-left: 2px solid var(--ink); padding: 20px 24px; background: var(--off); }
+  .urgency-text { font-size: 15px; line-height: 1.7; color: var(--ink); }
+
+  /* ── CONTACT FORM ── */
+  .contact-form { width: 100%; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .form-row .form-group { margin-bottom: 0; }
+
+  .form-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--stone);
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .form-input:focus { border-color: var(--ink); }
+  .form-input::placeholder { color: var(--muted); }
+
+  .form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a9690' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 15px 36px;
+    background: var(--ink);
+    color: var(--white);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--ink);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover { background: transparent; color: var(--ink); }
+  .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .form-status {
+    font-size: 13px;
+    margin-top: 12px;
+    min-height: 20px;
+    color: var(--mid);
+    letter-spacing: 0.02em;
+  }
+
+  .form-status.success { color: #2a7a4f; }
+  .form-status.error   { color: #b94040; }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 36px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--white); }
+  .footer-note { font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .hero-left > * { animation: fadeUp 0.7s ease both; }
+  .hero-left .tag       { animation-delay: 0.05s; }
+  .hero-left h1         { animation-delay: 0.15s; }
+  .hero-left .hero-desc { animation-delay: 0.25s; }
+  .hero-left .btn-group { animation-delay: 0.35s; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-d1 { transition-delay: 0.05s; }
+  .reveal-d2 { transition-delay: 0.15s; }
+  .reveal-d3 { transition-delay: 0.25s; }
+  .reveal-d4 { transition-delay: 0.38s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 28px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 28px 60px; gap: 48px; min-height: auto; }
+    .hero::after { display: none; }
+    .problem-inner { grid-template-columns: 1fr; gap: 48px; }
+    .levers-grid { grid-template-columns: 1fr; }
+    .section { padding: 72px 28px; }
+    .problem-section { padding: 72px 28px; }
+    .math-band { padding: 60px 28px; }
+    .calc-section { padding: 72px 28px; }
+    .calc-card { padding: 28px; }
+    .contact-section { grid-template-columns: 1fr; padding: 72px 28px; gap: 48px; }
+    .results-row { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 28px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">The 10·10·10 Formula</a>
+  <ul class="nav-links">
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#formula">The Formula</a></li>
+    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="tag">For Michigan entrepreneurs &amp; business owners</p>
+    <h1>Three levers.<br><strong>10%</strong> each.<br>33% total<br>growth.</h1>
+    <p class="hero-desc">Within your existing business, revenue grows through three levers — more clients, higher transaction value, and more frequent purchases. The 10-10-10 formula shows what happens when you improve all three deliberately, and the arithmetic is exact.</p>
+    <div class="btn-group">
+      <a class="btn-primary" href="#calculator">Run your numbers now</a>
+      <a class="btn-ghost" href="#contact">Talk to me first</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat">
+      <p class="stat-label">Lever one</p>
+      <div class="stat-number" data-target="10" data-suffix="%">0%</div>
+      <p class="stat-desc">More clients coming through the door</p>
+    </div>
+    <div class="hero-stat">
+      <p class="stat-label">Lever two</p>
+      <div class="stat-number" data-target="10" data-prefix="+" data-suffix="%">0%</div>
+      <p class="stat-desc">Higher value on every transaction</p>
+    </div>
+    <div class="hero-stat">
+      <p class="stat-label">Lever three</p>
+      <div class="stat-number" data-target="10" data-prefix="+" data-suffix="%">0%</div>
+      <p class="stat-desc">Clients returning more frequently</p>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll to understand why</span>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<div class="calc-section" id="calculator">
+  <div class="calc-inner">
+    <p class="section-tag reveal reveal-d1">Your numbers</p>
+    <h2 class="reveal reveal-d2">See what it means<br><em>for your business.</em></h2>
+    <p class="lead reveal reveal-d3">Enter your real numbers. Set each growth lever to whatever increase you think is achievable. The calculator shows exactly what that combination produces — no estimates, just multiplication.</p>
+
+    <div class="calc-card reveal reveal-d4">
+      <p class="calc-group-label">Baseline — where you are today</p>
+
+      <div class="ctrl-row">
+        <div class="ctrl-top">
+          <span class="ctrl-label">Number of customers</span>
+          <span class="ctrl-val" id="vd-bc">100</span>
+        </div>
+        <div class="range-wrap">
+          <div class="range-track"><div class="range-fill" id="rf-bc"></div></div>
+          <input type="range" id="ri-bc" min="1" max="10000" step="1" value="100">
+        </div>
+        <div class="ctrl-footer">
+          <button class="sbtn" id="sd-bc">−</button>
+          <button class="sbtn" id="su-bc">+</button>
+          <span class="or-label">or type exact</span>
+          <input class="ni-bare" id="ni-bc" type="number" min="1" max="10000" step="1" value="100">
+        </div>
+      </div>
+
+      <div class="ctrl-row">
+        <div class="ctrl-top">
+          <span class="ctrl-label">Average transaction value</span>
+          <span class="ctrl-val" id="vd-bt">$250</span>
+        </div>
+        <div class="range-wrap">
+          <div class="range-track"><div class="range-fill" id="rf-bt"></div></div>
+          <input type="range" id="ri-bt" min="1" max="10000" step="1" value="250">
+        </div>
+        <div class="ctrl-footer">
+          <button class="sbtn" id="sd-bt">−</button>
+          <button class="sbtn" id="su-bt">+</button>
+          <span class="or-label">or type exact</span>
+          <div class="ni-wrap">
+            <span class="ni-prefix">$</span>
+            <input class="ni" id="ni-bt" type="number" min="1" max="10000" step="1" value="250">
+          </div>
+        </div>
+      </div>
+
+      <div class="ctrl-row">
+        <div class="ctrl-top">
+          <span class="ctrl-label">Purchases per year</span>
+          <span class="ctrl-val" id="vd-bf">4×</span>
+        </div>
+        <div class="range-wrap">
+          <div class="range-track"><div class="range-fill" id="rf-bf"></div></div>
+          <input type="range" id="ri-bf" min="1" max="52" step="1" value="4">
+        </div>
+        <div class="ctrl-footer">
+          <button class="sbtn" id="sd-bf">−</button>
+          <button class="sbtn" id="su-bf">+</button>
+          <span class="or-label">or type exact</span>
+          <input class="ni-bare" id="ni-bf" type="number" min="1" max="52" step="1" value="4">
+        </div>
+      </div>
+
+      <hr class="calc-divider">
+      <p class="calc-group-label">Growth levers — move each by any amount</p>
+
+      <div class="ctrl-row">
+        <div class="ctrl-top">
+          <span class="ctrl-label">Increase in clients</span>
+          <span class="ctrl-val" id="vd-gc">+10%</span>
+        </div>
+        <div class="range-wrap">
+          <div class="range-track"><div class="range-fill" id="rf-gc"></div></div>
+          <input type="range" id="ri-gc" min="0" max="100" step="1" value="10">
+        </div>
+        <div class="ctrl-footer">
+          <button class="sbtn" id="sd-gc">−</button>
+          <button class="sbtn" id="su-gc">+</button>
+          <span class="or-label">or type exact</span>
+          <input class="ni-bare" id="ni-gc" type="number" min="0" max="100" step="1" value="10">
+        </div>
+      </div>
+
+      <div class="ctrl-row">
+        <div class="ctrl-top">
+          <span class="ctrl-label">Increase in transaction value</span>
+          <span class="ctrl-val" id="vd-gt">+10%</span>
+        </div>
+        <div class="range-wrap">
+          <div class="range-track"><div class="range-fill" id="rf-gt"></div></div>
+          <input type="range" id="ri-gt" min="0" max="100" step="1" value="10">
+        </div>
+        <div class="ctrl-footer">
+          <button class="sbtn" id="sd-gt">−</button>
+          <button class="sbtn" id="su-gt">+</button>
+          <span class="or-label">or type exact</span>
+          <input class="ni-bare" id="ni-gt" type="number" min="0" max="100" step="1" value="10">
+        </div>
+      </div>
+
+      <div class="ctrl-row">
+        <div class="ctrl-top">
+          <span class="ctrl-label">Increase in purchase frequency</span>
+          <span class="ctrl-val" id="vd-gf">+10%</span>
+        </div>
+        <div class="range-wrap">
+          <div class="range-track"><div class="range-fill" id="rf-gf"></div></div>
+          <input type="range" id="ri-gf" min="0" max="100" step="1" value="10">
+        </div>
+        <div class="ctrl-footer">
+          <button class="sbtn" id="sd-gf">−</button>
+          <button class="sbtn" id="su-gf">+</button>
+          <span class="or-label">or type exact</span>
+          <input class="ni-bare" id="ni-gf" type="number" min="0" max="100" step="1" value="10">
+        </div>
+      </div>
+
+      <div class="eq-display" id="eq-display">— × — × — = —</div>
+
+      <div class="results-row">
+        <div class="res-cell">
+          <div class="res-label">Baseline revenue</div>
+          <div class="res-val" id="m-before">—</div>
+        </div>
+        <div class="res-cell">
+          <div class="res-label">New revenue</div>
+          <div class="res-val accent" id="m-after">—</div>
+        </div>
+        <div class="res-cell">
+          <div class="res-label">Total growth</div>
+          <div class="res-val accent" id="m-pct">—</div>
+        </div>
+        <div class="res-cell">
+          <div class="res-label">Extra revenue</div>
+          <div class="res-val accent" id="m-gain">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MATH -->
+<div class="math-band">
+  <p class="math-label reveal reveal-d1">The arithmetic of leverage</p>
+  <div class="math-chips reveal reveal-d2">
+    <div class="chip"><strong>1.10</strong> clients</div>
+    <div class="chip" style="font-style:normal;font-size:20px;border:none;padding:10px 4px;">×</div>
+    <div class="chip"><strong>1.10</strong> transaction</div>
+    <div class="chip" style="font-style:normal;font-size:20px;border:none;padding:10px 4px;">×</div>
+    <div class="chip"><strong>1.10</strong> frequency</div>
+    <div class="chip" style="font-style:normal;font-size:20px;border:none;padding:10px 4px;">=</div>
+    <div class="chip" style="background:var(--ink);border-color:var(--ink);color:var(--white);"><strong style="color:var(--white);">1.331</strong></div>
+  </div>
+  <p class="math-equation reveal reveal-d3">Three 10% improvements multiply into <strong>33.1% total growth.</strong></p>
+  <p class="math-note reveal reveal-d4">This isn't addition — it's multiplication. Each lever amplifies the others. The arithmetic is exact. What varies is how quickly and how deliberately you move each lever in your business.</p>
+</div>
+
+<!-- THREE LEVERS -->
+<section class="section" id="formula">
+  <p class="section-tag reveal reveal-d1">The framework</p>
+  <h2 class="reveal reveal-d2">Three levers.<br><em>Every dollar of growth.</em></h2>
+  <p class="lead reveal reveal-d3">Within your existing operation, revenue comes from three places: who buys from you, how much they spend, and how often they come back. Most owners actively manage one. The 10-10-10 framework is about managing all three at the same time.</p>
+
+  <div class="levers-grid">
+    <div class="lever-card reveal reveal-d1">
+      <span class="lever-num">01</span>
+      <div class="lever-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <p class="lever-title">More Clients</p>
+      <p class="lever-body">Expand your reach, sharpen your message, build referral systems. This is the lever every business focuses on — and the most expensive one to move. It works. It's just not the whole story.</p>
+    </div>
+    <div class="lever-card reveal reveal-d2">
+      <span class="lever-num">02</span>
+      <div class="lever-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <p class="lever-title">Bigger Transactions</p>
+      <p class="lever-body">A bundle, an upgrade, a premium tier, a complementary service. You've already earned their trust — now put it to work. Clients regularly spend more when given a genuinely valuable reason to.</p>
+    </div>
+    <div class="lever-card reveal reveal-d3">
+      <span class="lever-num">03</span>
+      <div class="lever-icon">
+        <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      </div>
+      <p class="lever-title">More Frequent Buys</p>
+      <p class="lever-body">Bring existing clients back sooner. This is the cheapest growth you'll ever find — they already know you, trust you, and like you. A loyalty program, a well-timed offer, a simple follow-up can do it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<div class="problem-section">
+  <div class="problem-inner">
+    <div class="problem-left">
+      <p class="section-tag reveal reveal-d1">The real problem</p>
+      <h2 class="reveal reveal-d2">Most businesses grow at a <em>fraction of what the math allows.</em></h2>
+      <p class="lead reveal reveal-d3">Most business owners focus almost entirely on acquiring new customers — the most expensive lever to move. The other two levers sit untouched, and revenue stays flat as a result.</p>
+    </div>
+    <div class="problem-right">
+      <ul class="problem-list">
+        <li class="reveal reveal-d1">You spend heavily to acquire new customers while existing ones drift away silently</li>
+        <li class="reveal reveal-d2">Most clients would spend more if presented with a relevant reason — few businesses consistently make that offer</li>
+        <li class="reveal reveal-d3">Months pass between purchases that could happen in weeks</li>
+        <li class="reveal reveal-d4">The result: linear growth at best, stagnation at worst</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div style="border-bottom: 1px solid var(--border);">
+  <div class="contact-section" id="contact">
+    <div class="contact-left">
+      <p class="section-tag reveal reveal-d1">Before things get complicated</p>
+      <h2 class="reveal reveal-d2">This is the moment<br><em>to move.</em></h2>
+      <p class="contact-urgency reveal reveal-d3">If the calculator just showed you a number that surprised you — that's the formula working. The math isn't the hard part. Identifying exactly where your 10% is in each lever, and building a plan to capture it, is where most owners need help.</p>
+      <p class="contact-urgency reveal reveal-d3">That's what I do. We look at your actual numbers, your actual business, and map out what's realistic and what it's worth.</p>
+      <p class="contact-urgency reveal reveal-d3">This conversation costs you nothing. Waiting costs you the difference.</p>
+      <div class="contact-form reveal reveal-d3">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f-name">Full Name</label>
+            <input class="form-input" id="f-name" type="text" placeholder="Jane Smith" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-email">Email</label>
+            <input class="form-input" id="f-email" type="email" placeholder="jane@business.com" autocomplete="email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f-phone">Phone</label>
+            <input class="form-input" id="f-phone" type="tel" placeholder="(555) 000-0000" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-biz">Business Name</label>
+            <input class="form-input" id="f-biz" type="text" placeholder="Acme Co." autocomplete="organization">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-industry">Industry</label>
+          <select class="form-input form-select" id="f-industry">
+            <option value="" disabled selected>Select your industry</option>
+            <option>Trades & Construction</option>
+            <option>Retail</option>
+            <option>Restaurant & Food Service</option>
+            <option>Auto & Transportation</option>
+            <option>Healthcare & Medical</option>
+            <option>Real Estate</option>
+            <option>Professional Services</option>
+            <option>Manufacturing</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-message">Message</label>
+          <textarea class="form-input form-textarea" id="f-message" placeholder="Tell me a bit about your business and what you're looking to improve..."></textarea>
+        </div>
+        <button class="form-submit" id="form-submit-btn" type="button">Send Message</button>
+        <p class="form-status" id="form-status"></p>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="testimonial-block reveal reveal-d2">
+        <p class="testimonial-text">"We were focused entirely on getting new customers. When we started working all three levers deliberately — transaction value, frequency, and client growth together — the numbers moved in a way that surprised us. The formula isn't theory. It's arithmetic."</p>
+        <p class="testimonial-name">— Michigan business owner</p>
+      </div>
+      <div class="urgency-box reveal reveal-d3">
+        <p class="urgency-text">The owners who understand this framework and apply it deliberately have a measurable advantage over those who don't. The conversation to find out if it applies to your business costs nothing. <strong>Reach out and let's look at your numbers.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">The 10·10·10 Formula</span>
+  <span class="footer-note">Based on Jay Abraham's proven framework &nbsp;·&nbsp; © 2026</span>
+</footer>
+
+<script>
+/* ── CONFIG ── */
+const cfgs = [
+  {id:'bc', min:1,   max:10000, step:1,   val:100,  isMoney:false, isGrowth:false},
+  {id:'bt', min:1,   max:10000, step:1,   val:250,  isMoney:true,  isGrowth:false},
+  {id:'bf', min:1,   max:52,    step:1,   val:4,    isMoney:false, isGrowth:false},
+  {id:'gc', min:0,   max:100,   step:1,   val:10,   isMoney:false, isGrowth:true},
+  {id:'gt', min:0,   max:100,   step:1,   val:10,   isMoney:false, isGrowth:true},
+  {id:'gf', min:0,   max:100,   step:1,   val:10,   isMoney:false, isGrowth:true},
+];
+
+const st = {};
+cfgs.forEach(c => st[c.id] = c.val);
+
+/* ── FORMAT HELPERS ── */
+function clamp(v, mn, mx) { return Math.min(mx, Math.max(mn, v)); }
+
+function fmtM(v) {
+  if (v >= 1000000) return '$' + (v/1000000).toFixed(v % 100000 === 0 ? 1 : 2) + 'M';
+  if (v >= 1000)    return '$' + (v/1000).toFixed(v % 1000 === 0 ? 0 : 1) + 'k';
+  return '$' + Math.round(v).toLocaleString();
+}
+
+function fmtDisplay(cfg, v) {
+  if (cfg.isMoney)  return fmtM(v);
+  if (cfg.isGrowth) return '+' + Math.round(v) + '%';
+  return Math.round(v).toLocaleString() + (cfg.id === 'bf' ? '×' : '');
+}
+
+function fmtRev(v) {
+  if (v >= 1000000000) return '$' + (v/1000000000).toFixed(2) + 'B';
+  if (v >= 1000000)    return '$' + (v/1000000).toFixed(2) + 'M';
+  if (v >= 1000)       return '$' + (v/1000).toFixed(1) + 'k';
+  return '$' + Math.round(v).toLocaleString();
+}
+
+/* ── TRACK FILL ── */
+function updateFill(cfg, val) {
+  const fill = document.getElementById('rf-' + cfg.id);
+  if (!fill) return;
+  const pct = ((val - cfg.min) / (cfg.max - cfg.min)) * 100;
+  fill.style.width = pct + '%';
+}
+
+/* ── COUNT-UP FOR RESULT CELLS ── */
+let countUpTimers = {};
+
+function animateValue(el, from, to, duration, formatter) {
+  if (countUpTimers[el.id]) cancelAnimationFrame(countUpTimers[el.id]);
+  const start = performance.now();
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
+    const current = from + (to - from) * eased;
+    el.textContent = formatter(current);
+    if (progress < 1) countUpTimers[el.id] = requestAnimationFrame(tick);
+    else el.textContent = formatter(to);
+  }
+  countUpTimers[el.id] = requestAnimationFrame(tick);
+}
+
+/* ── SLIDER CONTROLS ── */
+cfgs.forEach(cfg => {
+  function set(v) {
+    const r = cfg.step < 1 ? parseFloat(v.toFixed(2)) : Math.round(v / cfg.step) * cfg.step;
+    const c = clamp(r, cfg.min, cfg.max);
+    st[cfg.id] = c;
+    document.getElementById('ri-' + cfg.id).value = c;
+    document.getElementById('ni-' + cfg.id).value = c;
+    document.getElementById('vd-' + cfg.id).textContent = fmtDisplay(cfg, c);
+    updateFill(cfg, c);
+    update();
+  }
+
+  document.getElementById('ri-' + cfg.id).addEventListener('input', e => set(parseFloat(e.target.value)));
+  document.getElementById('ni-' + cfg.id).addEventListener('change', e => set(parseFloat(e.target.value) || cfg.min));
+  document.getElementById('ni-' + cfg.id).addEventListener('keydown', e => {
+    if (e.key === 'ArrowUp')   { e.preventDefault(); set(st[cfg.id] + cfg.step); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); set(st[cfg.id] - cfg.step); }
+  });
+  document.getElementById('sd-' + cfg.id).addEventListener('click', () => set(st[cfg.id] - cfg.step));
+  document.getElementById('su-' + cfg.id).addEventListener('click', () => set(st[cfg.id] + cfg.step));
+});
+
+/* ── CALCULATOR UPDATE ── */
+let prevAfter = 0, prevGain = 0, prevBefore = 0, prevPct = 0;
+
+function update() {
+  const bc = st.bc, bt = st.bt, bf = st.bf;
+  const gc = st.gc/100, gt = st.gt/100, gf = st.gf/100;
+
+  const before  = bc * bt * bf;
+  const ncR = Math.round(bc * (1 + gc) * 100) / 100;
+  const ntR = Math.round(bt * (1 + gt) * 100) / 100;
+  const nfR = Math.round(bf * (1 + gf) * 100) / 100;
+  const after   = ncR * ntR * nfR;
+  const pct     = (after - before) / before * 100;
+  const gain    = after - before;
+
+  // Animate result cells
+  const dur = 380;
+  const elBefore = document.getElementById('m-before');
+  const elAfter  = document.getElementById('m-after');
+  const elPct    = document.getElementById('m-pct');
+  const elGain   = document.getElementById('m-gain');
+
+  animateValue(elBefore, prevBefore, before, dur, v => fmtRev(v));
+  animateValue(elAfter,  prevAfter,  after,  dur, v => fmtRev(v));
+  animateValue(elPct,    prevPct,    pct,    dur, v => (v >= 0 ? '+' : '') + v.toFixed(1) + '%');
+  animateValue(elGain,   prevGain,   gain,   dur, v => (v >= 0 ? '+' : '') + fmtRev(Math.abs(v)));
+
+  prevBefore = before;
+  prevAfter  = after;
+  prevPct    = pct;
+  prevGain   = gain;
+
+  document.getElementById('eq-display').textContent =
+    Math.round(ncR).toLocaleString() + ' clients  ×  ' + fmtM(ntR) + ' avg.  ×  ' + nfR.toFixed(2) + 'x/yr  =  ' + fmtRev(after);
+}
+
+/* ── INIT FILLS & FIRST UPDATE ── */
+cfgs.forEach(cfg => updateFill(cfg, cfg.val));
+update();
+
+/* ── CONTACT FORM ── */
+document.getElementById('form-submit-btn').addEventListener('click', async () => {
+  const name     = document.getElementById('f-name').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
+  const phone    = document.getElementById('f-phone').value.trim();
+  const biz      = document.getElementById('f-biz').value.trim();
+  const industry = document.getElementById('f-industry').value;
+  const message  = document.getElementById('f-message').value.trim();
+  const status   = document.getElementById('form-status');
+  const btn      = document.getElementById('form-submit-btn');
+
+  if (!name || !email || !phone || !biz || !industry || !message) {
+    status.textContent = 'Please fill in all fields before sending.';
+    status.className = 'form-status error';
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    status.textContent = 'Please enter a valid email address.';
+    status.className = 'form-status error';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  status.textContent = '';
+  status.className = 'form-status';
+
+  const payload = { name, email, phone, business: biz, industry, message };
+
+  try {
+    // ── REPLACE WITH YOUR ENDPOINT WHEN READY ──
+    const endpoint = 'https://YOUR_ENDPOINT_HERE';
+
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      status.textContent = "Message sent. We'll be in touch shortly.";
+      status.className = 'form-status success';
+      btn.textContent = 'Sent';
+      ['f-name','f-email','f-phone','f-biz','f-message'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('f-industry').selectedIndex = 0;
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (e) {
+    status.textContent = 'Something went wrong. Please try again or reach out directly.';
+    status.className = 'form-status error';
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  }
+});
+
+/* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => observer.observe(el));
+
+/* ── HERO STAT COUNT-UP ON LOAD ── */
+window.addEventListener('load', () => {
+  document.querySelectorAll('.stat-number[data-target]').forEach((el, i) => {
+    const target = parseInt(el.dataset.target);
+    const prefix = el.dataset.prefix || '+';
+    const suffix = el.dataset.suffix || '';
+    setTimeout(() => {
+      let start = null;
+      const duration = 900;
+      function tick(ts) {
+        if (!start) start = ts;
+        const elapsed = ts - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const val = Math.round(eased * target);
+        el.textContent = prefix + val + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(tick);
+    }, 600 + i * 180);
+  });
+});
+</script>
+</body>
+</html>
